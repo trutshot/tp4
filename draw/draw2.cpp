@@ -23,23 +23,23 @@
 #define ID_BUTTON13				212
 
 
-const WORD ID_TIMER=1;
-const WORD ID_TIMER1=2;
-const WORD ID_TIMER2=3;
+const WORD ID_TIMER = 1;
+const WORD ID_TIMER1 = 2;
+const WORD ID_TIMER2 = 3;
 
 // Global Variables:
 HINSTANCE hInst;								// current instance
 TCHAR szTitle[MAX_LOADSTRING];					// The title bar text
 TCHAR szWindowClass[MAX_LOADSTRING];			// the main window class name
 
-int polozenie=500;
+int polozenie = 500;
 int wn_windy;
 
-int gdzie_winda=0;
+int gdzie_winda = 0;
 int gdzie_pasazer;
 int dokad;
 
-int predkosc=10;
+int predkosc = 10;
 
 int px; //1000
 int py; //320
@@ -49,14 +49,14 @@ bool czy_cz;
 HWND hwndButton;
 // sent data
 RECT drawArea1 = { 595,105, 805, 610 }; // winda
-RECT drawArea2 = {100, 100, 10000, 50000};
+RECT drawArea2 = { 100, 100, 10000, 50000 };
 
-RECT drawArea3 = {811,100, 1159,359}; //pietro 2
-RECT drawArea4 = {210,100, 580,239}; //pietro 3
-RECT drawArea5 = {210,250, 580,479}; //pietro 1
-RECT drawArea6 = {811,370, 1159,599}; //pietro 0
+RECT drawArea3 = { 811,100, 1159,359 }; //pietro 2
+RECT drawArea4 = { 210,100, 580,239 }; //pietro 3
+RECT drawArea5 = { 210,250, 580,479 }; //pietro 1
+RECT drawArea6 = { 811,370, 1159,599 }; //pietro 0
 
-RECT drawArea10 = {100, 0, 1000, 100};
+RECT drawArea10 = { 100, 0, 1000, 100 };
 // Forward declarations of functions included in this code module:
 ATOM				MyRegisterClass(HINSTANCE hInstance);
 BOOL				InitInstance(HINSTANCE, int);
@@ -69,54 +69,54 @@ void rysuj_pietra(HWND hWnd, HDC &hdc, PAINTSTRUCT &ps, RECT *drawArea)
 	Graphics graphics(hdc);
 
 	Pen pen(Color(255, 0, 0, 255));
-	graphics.DrawRectangle(&pen,590,100,220,520);
-	graphics.DrawRectangle(&pen,600,500,200,100);
-	
-	graphics.DrawLine(&pen,810,600,1200,600);
-	
-	graphics.DrawLine(&pen,590,480,200,480);
-	
-	graphics.DrawLine(&pen,810,360,1200,360);
-	
-	graphics.DrawLine(&pen,590,240,200,240);
-	
+	graphics.DrawRectangle(&pen, 590, 100, 220, 520);
+	graphics.DrawRectangle(&pen, 600, 500, 200, 100);
+
+	graphics.DrawLine(&pen, 810, 600, 1200, 600);
+
+	graphics.DrawLine(&pen, 590, 480, 200, 480);
+
+	graphics.DrawLine(&pen, 810, 360, 1200, 360);
+
+	graphics.DrawLine(&pen, 590, 240, 200, 240);
+
 	WCHAR string1[] = L"00kg";
-	 PointF origin(650.0f, 30.0f);
-	 Font myFont(L"Arial", 16);
-	 SolidBrush blackBrush(Color(255, 0, 0, 0));
-	 graphics.DrawString(string1,4,&myFont,origin,&blackBrush);
+	PointF origin(650.0f, 30.0f);
+	Font myFont(L"Arial", 16);
+	SolidBrush blackBrush(Color(255, 0, 0, 0));
+	graphics.DrawString(string1, 4, &myFont, origin, &blackBrush);
 }
-void masa(HDC hdc,int ile)
+void masa(HDC hdc, int ile)
 {
 	Graphics graphics(hdc);
 
-   WCHAR string[] = L"70kg";
-   WCHAR string1[] = L"00kg";
+	WCHAR string[] = L"70kg";
+	WCHAR string1[] = L"00kg";
 
-   Font myFont(L"Arial", 16);
-   PointF origin(650.0f, 30.0f);
-   SolidBrush blackBrush(Color(255, 0, 0, 0));
-	if(ile==1)
-   graphics.DrawString(string,4,&myFont,origin,&blackBrush);
-   if(ile==0)
-   graphics.DrawString(string1,4,&myFont,origin,&blackBrush);	
+	Font myFont(L"Arial", 16);
+	PointF origin(650.0f, 30.0f);
+	SolidBrush blackBrush(Color(255, 0, 0, 0));
+	if (ile == 1)
+		graphics.DrawString(string, 4, &myFont, origin, &blackBrush);
+	if (ile == 0)
+		graphics.DrawString(string1, 4, &myFont, origin, &blackBrush);
 }
 void rysuj_pasazera(HDC hdc)
 {
 	Graphics graphics(hdc);
-	Pen pen(Color(255,150, 50, 255));
-	graphics.DrawRectangle(&pen,px,py,20,20);
+	Pen pen(Color(255, 150, 50, 255));
+	graphics.DrawRectangle(&pen, px, py, 20, 20);
 }
 void MyOnPaint(HDC hdc)
 {
 	Graphics graphics(hdc);
 	Pen pen(Color(255, 0, 0, 255));
-	graphics.DrawRectangle(&pen,600,polozenie,200,100);
+	graphics.DrawRectangle(&pen, 600, polozenie, 200, 100);
 
 }
 void repaintWindow(HWND hWnd, HDC &hdc, PAINTSTRUCT &ps, RECT *drawArea)
 {
-	if (drawArea==NULL)
+	if (drawArea == NULL)
 		InvalidateRect(hWnd, NULL, TRUE); // repaint all
 	else
 		InvalidateRect(hWnd, drawArea, TRUE); //repaint drawArea
@@ -124,28 +124,28 @@ void repaintWindow(HWND hWnd, HDC &hdc, PAINTSTRUCT &ps, RECT *drawArea)
 	MyOnPaint(hdc);
 	EndPaint(hWnd, &ps);
 }
-void repaintWindow_p(HWND hWnd, HDC &hdc, PAINTSTRUCT &ps, RECT *drawArea,bool czy_cz)
+void repaintWindow_p(HWND hWnd, HDC &hdc, PAINTSTRUCT &ps, RECT *drawArea, bool czy_cz)
 {
-	if(czy_cz==false)
+	if (czy_cz == false)
 	{
-	InvalidateRect(hWnd, drawArea,false);
-	hdc = BeginPaint(hWnd, &ps);
-	rysuj_pasazera(hdc);
-	EndPaint(hWnd, &ps);
+		InvalidateRect(hWnd, drawArea, false);
+		hdc = BeginPaint(hWnd, &ps);
+		rysuj_pasazera(hdc);
+		EndPaint(hWnd, &ps);
 	}
-	if(czy_cz==true)
+	if (czy_cz == true)
 	{
 		InvalidateRect(hWnd, drawArea, true);
 	}
 }
-void repaintWindow_txt(HWND hWnd, HDC &hdc, PAINTSTRUCT &ps, RECT *drawArea,int ile)
+void repaintWindow_txt(HWND hWnd, HDC &hdc, PAINTSTRUCT &ps, RECT *drawArea, int ile)
 {
 
-	InvalidateRect(hWnd, drawArea,true);
+	InvalidateRect(hWnd, drawArea, true);
 	hdc = BeginPaint(hWnd, &ps);
-	masa(hdc,ile);
+	masa(hdc, ile);
 	EndPaint(hWnd, &ps);
-	
+
 }
 // main function (exe hInstance)
 int APIENTRY _tWinMain(HINSTANCE hInstance,
@@ -222,7 +222,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
 	hInst = hInstance; // Store instance handle (of exe) in our global variable
 
-	// main window
+					   // main window
 	hWnd = CreateWindow(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, NULL, NULL, hInstance, NULL);
 
@@ -236,18 +236,18 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 		(HMENU)ID_BUTTON1,                   // the ID of your button
 		hInstance,                            // the instance of your application
 		NULL);                               // extra bits you dont really need                                                   
-	                  // extra bits you dont really need
-	    hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
+											 // extra bits you dont really need
+	hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
 		TEXT("Na 0"),                  // the caption of the button
 		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,  // the styles
-		 150, 470,                               // the left and top co-ordinates
+		150, 470,                               // the left and top co-ordinates
 		50, 20,                              // width and height
 		hWnd,                                 // parent window handle
 		(HMENU)ID_BUTTON2,                   // the ID of your button
 		hInstance,                            // the instance of your application
-		NULL);              
+		NULL);
 
-		hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
+	hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
 		TEXT("Na 1 "),                  // the caption of the button
 		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,  // the styles
 		150, 210,                                   // the left and top co-ordinates
@@ -255,9 +255,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 		hWnd,                                 // parent window handle
 		(HMENU)ID_BUTTON3,                   // the ID of your button
 		hInstance,                            // the instance of your application
-		NULL);              
-		
-		hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
+		NULL);
+
+	hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
 		TEXT("Na 2 "),                  // the caption of the button
 		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,  // the styles
 		150, 450,                                  // the left and top co-ordinates
@@ -265,9 +265,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 		hWnd,                                 // parent window handle
 		(HMENU)ID_BUTTON4,                   // the ID of your button
 		hInstance,                            // the instance of your application
-		NULL);     
-		
-		hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
+		NULL);
+
+	hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
 		TEXT("Na 2 "),                  // the caption of the button
 		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,  // the styles
 		150, 190,                                  // the left and top co-ordinates
@@ -275,9 +275,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 		hWnd,                                 // parent window handle
 		(HMENU)ID_BUTTON5,                   // the ID of your button
 		hInstance,                            // the instance of your application
-		NULL);    
-		
-		hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
+		NULL);
+
+	hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
 		TEXT("Na 0 "),                  // the caption of the button
 		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,  // the styles
 		150, 230,                                  // the left and top co-ordinates
@@ -285,9 +285,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 		hWnd,                                 // parent window handle
 		(HMENU)ID_BUTTON6,                   // the ID of your button
 		hInstance,                            // the instance of your application
-		NULL);  
-		
-		hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
+		NULL);
+
+	hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
 		TEXT("Na 3 "),                  // the caption of the button
 		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,  // the styles
 		1200, 310,                                  // the left and top co-ordinates
@@ -295,9 +295,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 		hWnd,                                 // parent window handle
 		(HMENU)ID_BUTTON7,                   // the ID of your button
 		hInstance,                            // the instance of your application
-		NULL);  
-		
-		hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
+		NULL);
+
+	hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
 		TEXT("Na 1 "),                  // the caption of the button
 		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,  // the styles
 		1200, 330,                                  // the left and top co-ordinates
@@ -305,9 +305,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 		hWnd,                                 // parent window handle
 		(HMENU)ID_BUTTON8,                   // the ID of your button
 		hInstance,                            // the instance of your application
-		NULL);  
-	  	   
-	  	hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
+		NULL);
+
+	hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
 		TEXT("Na 0 "),                  // the caption of the button
 		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,  // the styles
 		1200, 350,                                  // the left and top co-ordinates
@@ -315,9 +315,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 		hWnd,                                 // parent window handle
 		(HMENU)ID_BUTTON9,                   // the ID of your button
 		hInstance,                            // the instance of your application
-		NULL);  
-		
-		hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
+		NULL);
+
+	hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
 		TEXT("Na 3 "),                  // the caption of the button
 		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,  // the styles
 		1200, 550,                                  // the left and top co-ordinates
@@ -325,9 +325,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 		hWnd,                                 // parent window handle
 		(HMENU)ID_BUTTON10,                   // the ID of your button
 		hInstance,                            // the instance of your application
-		NULL);  
-		
-		hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
+		NULL);
+
+	hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
 		TEXT("Na 2 "),                  // the caption of the button
 		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,  // the styles
 		1200, 570,                                  // the left and top co-ordinates
@@ -335,9 +335,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 		hWnd,                                 // parent window handle
 		(HMENU)ID_BUTTON11,                   // the ID of your button
 		hInstance,                            // the instance of your application
-		NULL);  
-			
-		hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
+		NULL);
+
+	hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
 		TEXT("Na 1 "),                  // the caption of the button
 		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,  // the styles
 		1200, 590,                                  // the left and top co-ordinates
@@ -345,7 +345,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 		hWnd,                                 // parent window handle
 		(HMENU)ID_BUTTON12,                   // the ID of your button
 		hInstance,                            // the instance of your application
-		NULL);  
+		NULL);
 
 	if (!hWnd)
 	{
@@ -390,100 +390,100 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			DestroyWindow(hWnd);
 			break;
 		case ID_BUTTON1:
-			px=400;
-			py=440;
-			repaintWindow_p(hWnd, hdc, ps, &drawArea5,false);
-			gdzie_pasazer=1;
-			dokad=3;
-			SetTimer(hWnd, ID_TIMER,predkosc, NULL );
+			px = 400;
+			py = 440;
+			repaintWindow_p(hWnd, hdc, ps, &drawArea5, false);
+			gdzie_pasazer = 1;
+			dokad = 3;
+			SetTimer(hWnd, ID_TIMER, predkosc, NULL);
 			break;
 		case ID_BUTTON2:
-			px=400;
-			py=440;
-			repaintWindow_p(hWnd, hdc, ps, &drawArea5,false);
-			gdzie_pasazer=1;
-			dokad=0;
-			SetTimer(hWnd, ID_TIMER,predkosc, NULL );
+			px = 400;
+			py = 440;
+			repaintWindow_p(hWnd, hdc, ps, &drawArea5, false);
+			gdzie_pasazer = 1;
+			dokad = 0;
+			SetTimer(hWnd, ID_TIMER, predkosc, NULL);
 			break;
 		case ID_BUTTON3:
-			px=400;
-			py=200;
-			repaintWindow_p(hWnd, hdc, ps, &drawArea4,false);
-			gdzie_pasazer=3;
-			dokad=1;
-			SetTimer(hWnd, ID_TIMER,predkosc, NULL );
+			px = 400;
+			py = 200;
+			repaintWindow_p(hWnd, hdc, ps, &drawArea4, false);
+			gdzie_pasazer = 3;
+			dokad = 1;
+			SetTimer(hWnd, ID_TIMER, predkosc, NULL);
 			break;
 		case ID_BUTTON4:
-			px=400;
-			py=440;
-			repaintWindow_p(hWnd, hdc, ps, &drawArea5,false);
-			gdzie_pasazer=1;
-			dokad=2;
-			SetTimer(hWnd, ID_TIMER,predkosc, NULL );
+			px = 400;
+			py = 440;
+			repaintWindow_p(hWnd, hdc, ps, &drawArea5, false);
+			gdzie_pasazer = 1;
+			dokad = 2;
+			SetTimer(hWnd, ID_TIMER, predkosc, NULL);
 			break;
 		case ID_BUTTON5:
-			px=400;
-			py=200;
-			repaintWindow_p(hWnd, hdc, ps, &drawArea4,false);
-			gdzie_pasazer=3;
-			dokad=2;
-			SetTimer(hWnd, ID_TIMER,predkosc, NULL );
+			px = 400;
+			py = 200;
+			repaintWindow_p(hWnd, hdc, ps, &drawArea4, false);
+			gdzie_pasazer = 3;
+			dokad = 2;
+			SetTimer(hWnd, ID_TIMER, predkosc, NULL);
 			break;
 		case ID_BUTTON6:
-			px=400;
-			py=200;
-			repaintWindow_p(hWnd, hdc, ps, &drawArea4,false);
-			gdzie_pasazer=3;
-			dokad=0;
-			SetTimer(hWnd, ID_TIMER,predkosc, NULL );
+			px = 400;
+			py = 200;
+			repaintWindow_p(hWnd, hdc, ps, &drawArea4, false);
+			gdzie_pasazer = 3;
+			dokad = 0;
+			SetTimer(hWnd, ID_TIMER, predkosc, NULL);
 			break;
 		case ID_BUTTON7:
-			px=1000;
-			py=320;
-			repaintWindow_p(hWnd, hdc, ps, &drawArea3,false);
-			gdzie_pasazer=2;
-			dokad=3;
-			SetTimer(hWnd, ID_TIMER,predkosc, NULL );
+			px = 1000;
+			py = 320;
+			repaintWindow_p(hWnd, hdc, ps, &drawArea3, false);
+			gdzie_pasazer = 2;
+			dokad = 3;
+			SetTimer(hWnd, ID_TIMER, predkosc, NULL);
 			break;
 		case ID_BUTTON8:
-			px=1000;
-			py=320;
-			repaintWindow_p(hWnd, hdc, ps, &drawArea3,false);
-			gdzie_pasazer=2;
-			dokad=1;
-			SetTimer(hWnd, ID_TIMER,predkosc, NULL );
+			px = 1000;
+			py = 320;
+			repaintWindow_p(hWnd, hdc, ps, &drawArea3, false);
+			gdzie_pasazer = 2;
+			dokad = 1;
+			SetTimer(hWnd, ID_TIMER, predkosc, NULL);
 			break;
 		case ID_BUTTON9:
-			px=1000;
-			py=320;
-			repaintWindow_p(hWnd, hdc, ps, &drawArea3,false);
-			gdzie_pasazer=2;
-			dokad=0;
-			SetTimer(hWnd, ID_TIMER,predkosc, NULL );
+			px = 1000;
+			py = 320;
+			repaintWindow_p(hWnd, hdc, ps, &drawArea3, false);
+			gdzie_pasazer = 2;
+			dokad = 0;
+			SetTimer(hWnd, ID_TIMER, predkosc, NULL);
 			break;
 		case ID_BUTTON10:
-			px=1000;
-			py=560;
-			repaintWindow_p(hWnd, hdc, ps, &drawArea6,false);
-			gdzie_pasazer=0;
-			dokad=3;
-			SetTimer(hWnd, ID_TIMER,predkosc, NULL );
+			px = 1000;
+			py = 560;
+			repaintWindow_p(hWnd, hdc, ps, &drawArea6, false);
+			gdzie_pasazer = 0;
+			dokad = 3;
+			SetTimer(hWnd, ID_TIMER, predkosc, NULL);
 			break;
 		case ID_BUTTON11:
-			px=1000;
-			py=560;
-			repaintWindow_p(hWnd, hdc, ps, &drawArea6,false);
-			gdzie_pasazer=0;
-			dokad=2;
-			SetTimer(hWnd, ID_TIMER,predkosc, NULL );
+			px = 1000;
+			py = 560;
+			repaintWindow_p(hWnd, hdc, ps, &drawArea6, false);
+			gdzie_pasazer = 0;
+			dokad = 2;
+			SetTimer(hWnd, ID_TIMER, predkosc, NULL);
 			break;
 		case ID_BUTTON12:
-			px=1000;
-			py=560;
-			repaintWindow_p(hWnd, hdc, ps, &drawArea6,false);
-			gdzie_pasazer=0;
-			dokad=1;
-			SetTimer(hWnd, ID_TIMER,predkosc, NULL );
+			px = 1000;
+			py = 560;
+			repaintWindow_p(hWnd, hdc, ps, &drawArea6, false);
+			gdzie_pasazer = 0;
+			dokad = 1;
+			SetTimer(hWnd, ID_TIMER, predkosc, NULL);
 			break;
 		default:
 			return DefWindowProc(hWnd, message, wParam, lParam);
@@ -501,61 +501,61 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		{
 		case ID_TIMER:
 			repaintWindow(hWnd, hdc, ps, &drawArea1);
-			if(gdzie_pasazer-gdzie_winda>0)
-			polozenie--;
-			if(gdzie_pasazer-gdzie_winda<0)
-			polozenie++;
-			if(polozenie==500-120*gdzie_pasazer)
+			if (gdzie_pasazer - gdzie_winda>0)
+				polozenie--;
+			if (gdzie_pasazer - gdzie_winda<0)
+				polozenie++;
+			if (polozenie == 500 - 120 * gdzie_pasazer)
 			{
-				repaintWindow_txt(hWnd, hdc, ps, &drawArea10,1);
-				if(gdzie_pasazer==2)
+				repaintWindow_txt(hWnd, hdc, ps, &drawArea10, 1);
+				if (gdzie_pasazer == 2)
 				{
-				repaintWindow_p(hWnd, hdc, ps, &drawArea3,true);
+					repaintWindow_p(hWnd, hdc, ps, &drawArea3, true);
 				}
-				if(gdzie_pasazer==3)
+				if (gdzie_pasazer == 3)
 				{
-				repaintWindow_p(hWnd, hdc, ps, &drawArea4,true);
+					repaintWindow_p(hWnd, hdc, ps, &drawArea4, true);
 				}
-				if(gdzie_pasazer==1)
+				if (gdzie_pasazer == 1)
 				{
-				repaintWindow_p(hWnd, hdc, ps, &drawArea5,true);
+					repaintWindow_p(hWnd, hdc, ps, &drawArea5, true);
 				}
-				if(gdzie_pasazer==0)
+				if (gdzie_pasazer == 0)
 				{
-				repaintWindow_p(hWnd, hdc, ps, &drawArea6,true);
+					repaintWindow_p(hWnd, hdc, ps, &drawArea6, true);
 				}
-			py=550-120*gdzie_pasazer;
-			px=700;
-			repaintWindow_p(hWnd, hdc, ps, &drawArea1,false);
-			KillTimer( hWnd, ID_TIMER );
-			gdzie_winda=gdzie_pasazer;
-			SetTimer(hWnd, ID_TIMER2,50, NULL );
-			SetTimer(hWnd, ID_TIMER1,predkosc, NULL );
+				py = 550 - 120 * gdzie_pasazer;
+				px = 700;
+				repaintWindow_p(hWnd, hdc, ps, &drawArea1, false);
+				KillTimer(hWnd, ID_TIMER);
+				gdzie_winda = gdzie_pasazer;
+				SetTimer(hWnd, ID_TIMER2, 50, NULL);
+				SetTimer(hWnd, ID_TIMER1, predkosc, NULL);
 			}
 			break;
 		case ID_TIMER1:
 			repaintWindow(hWnd, hdc, ps, &drawArea1);
-			repaintWindow_p(hWnd, hdc, ps, &drawArea1,false);
-			if(dokad-gdzie_winda>0)
+			repaintWindow_p(hWnd, hdc, ps, &drawArea1, false);
+			if (dokad - gdzie_winda>0)
 			{
-			polozenie--;
-			py--;
+				polozenie--;
+				py--;
 			}
-			if(dokad-gdzie_winda<0)
+			if (dokad - gdzie_winda<0)
 			{
-			polozenie++;
-			py++;
+				polozenie++;
+				py++;
 			}
-			if(polozenie==500-120*dokad)
+			if (polozenie == 500 - 120 * dokad)
 			{
-			repaintWindow_txt(hWnd, hdc, ps, &drawArea10,0);		
-			KillTimer( hWnd, ID_TIMER1 );
-			gdzie_winda=dokad;
-			RECT drawArea7 = {610,530-120*gdzie_winda, 790,590-120*gdzie_winda};
-			repaintWindow_p(hWnd, hdc, ps, &drawArea7,true);
+				repaintWindow_txt(hWnd, hdc, ps, &drawArea10, 0);
+				KillTimer(hWnd, ID_TIMER1);
+				gdzie_winda = dokad;
+				RECT drawArea7 = { 610,530 - 120 * gdzie_winda, 790,590 - 120 * gdzie_winda };
+				repaintWindow_p(hWnd, hdc, ps, &drawArea7, true);
 			}
 			break;
-		break;
+			break;
 		}
 	default:
 		return DefWindowProc(hWnd, message, wParam, lParam);
